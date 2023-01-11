@@ -1,25 +1,27 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState, useEffect } from "react";
+import "./styles.css";
+import Counter from "./Counter";
+import Footer from "./footer";
 
-function App() {
+export default function App() {
+  const [showCounter, setShowCounter] = useState(false);
+  const [count2, setCount2] = useState(false);
+
+  useEffect(() => {
+    setCount2(!count2)
+    console.log("changed : "+count2);
+  },[showCounter]);
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <h1> Our App</h1>
+      <h2>{count2? "unmounted" : "mounted"}</h2>
+      <button onClick={() => setShowCounter(!showCounter)}>
+        {showCounter ? "Hide Counter" : "Show Counter"}
+      </button>
+      {showCounter&&<Counter/>}
+      <br></br>
+      <Footer/>
     </div>
   );
 }
-
-export default App;
